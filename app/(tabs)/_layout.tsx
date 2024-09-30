@@ -1,34 +1,57 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { useAppSelector } from "@/state/hooks";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+export const unstable_settings = {
+  initialRouteName: "(map)/index",
+};
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const user = useAppSelector((state) => state.user);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="(create)"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="create-sharp" color={color} size={size} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="(list)"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list-circle-sharp" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(map)"
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="map-sharp" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(profile)"
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" color={color} size={size} />
           ),
         }}
       />
